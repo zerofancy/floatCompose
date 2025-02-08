@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.FrameLayout
+import android.widget.Toast
 import top.ntutn.floatcompose.util.AppContextUtil
 import top.ntutn.floatcompose.util.dp
 
@@ -32,7 +33,12 @@ class FloatingWindow @JvmOverloads constructor(
             it.layoutParams = LayoutParams(100.dp, 100.dp)
             it.setBackgroundColor(Color.RED)
         }
-        return FrameLayout(context).also { it.addView(view) }
+        return FrameLayout(context).also {
+            it.addView(view)
+            it.setOnClickListener {
+                Toast.makeText(context, "test", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     fun show() {
@@ -59,6 +65,7 @@ class FloatingWindow @JvmOverloads constructor(
         windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         windowManager?.addView(view, layoutParams)
 
+        view.setOnTouchListener(ItemViewTouchListener(layoutParam, windowManager))
         isShowing = true
     }
 
