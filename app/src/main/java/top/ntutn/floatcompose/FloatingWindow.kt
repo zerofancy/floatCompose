@@ -30,7 +30,7 @@ class FloatingWindow @JvmOverloads constructor(
 
     private fun createView(context: Context): View {
         val view = View(context).also {
-            it.layoutParams = LayoutParams(100.dp, 100.dp)
+            it.layoutParams = LayoutParams(300.dp, 200.dp)
             it.setBackgroundColor(Color.RED)
         }
         return FrameLayout(context).also {
