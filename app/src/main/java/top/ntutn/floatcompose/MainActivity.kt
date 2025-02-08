@@ -17,8 +17,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import top.ntutn.floatcompose.ui.theme.FloatComposeTheme
+import top.ntutn.floatcompose.util.AppContextUtil
 
 class MainActivity : ComponentActivity() {
+    private val floatingWindow = FloatingWindow(AppContextUtil.applicationContext)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -29,10 +32,12 @@ class MainActivity : ComponentActivity() {
                         name = "Android",
                         modifier = Modifier.padding(innerPadding),
                         showAction = {
-                            Toast.makeText(this, "I'm a Toast", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "I'm showing", Toast.LENGTH_SHORT).show()
+                            floatingWindow.show()
                         },
                         hideAction = {
                             Toast.makeText(this, "I'm gone", Toast.LENGTH_SHORT).show()
+                            floatingWindow.dismiss()
                         }
                     )
                 }
